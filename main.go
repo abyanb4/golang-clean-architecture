@@ -16,11 +16,11 @@ func main() {
 	e.Use(middleware.Recover())
 
 	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, Docker! <3")
+		return c.HTML(http.StatusOK, "Hello, Docker!, THis is abyan test auto live is on? <3")
 	})
 
 	e.GET("/ping", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
+		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK, pinged"})
 	})
 
 	httpPort := os.Getenv("HTTP_PORT")

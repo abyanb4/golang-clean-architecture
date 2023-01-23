@@ -1,4 +1,9 @@
-FROM golang:1.17-alpine
+FROM --platform=linux/amd64 golang:1.17
+USER root
+
+ENV FILE_LOC=./.dev/.air.toml
+
+RUN echo ${FILE_LOC}
 
 WORKDIR /app
 
@@ -9,6 +14,13 @@ RUN go mod download
 
 COPY . .
 
-RUN go build -o /golang-clean-architecture
+RUN curl -flo install.sh  https://raw.githubusercontent.com/cosmtrek/air/master/install.sh \
+    && chmod +x install.sh && sh install.sh && cp ./bin/air /bin/air
 
-CMD [ "/golang-clean-architecture" ]
+# RUN go build -o /golang-clean-architecture
+
+# CMD [ "/golang-clean-architecture"]
+# CMD ["air", "-c", "./.dev/.air.toml"]
+
+
+CMD air -c $FILE_LOC

@@ -4,7 +4,7 @@ docker-build:
 
 .PHONY: service-up
 service-up: 
-	docker compose up
+	docker compose -f docker-compose.yml up --build
 
 .PHONY: service-down
 service-down:
